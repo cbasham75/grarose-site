@@ -80,10 +80,8 @@ nav {
 @keyframes ticker { from{transform:translateX(0)}to{transform:translateX(-50%)} }
 
 /* REVEAL */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal { opacity: 1; transform: none; }
 .reveal.in { opacity: 1; transform: none; }
-/* Safety net — never leave content invisible */
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
