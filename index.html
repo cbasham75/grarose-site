@@ -82,6 +82,8 @@ nav {
 /* REVEAL */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.in { opacity: 1; transform: none; }
+/* Safety net — never leave content invisible */
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
@@ -392,6 +394,11 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Fallback — show all reveals after 300ms in case IntersectionObserver doesn't fire
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+  }, 300);
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
   }, { threshold: 0.08 });
