@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grarose — One Platform. Every Trade.</title>
+<meta name="description" content="Grarose builds software for the trades. Quote, invoice, estimate, and manage your field operations — all in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #22C55E;
+  --green-dark: #16a34a;
+  --green-light: rgba(34,197,94,0.08);
+  --stone: #A8A29E;
+  --dark: #0d1117;
+  --navy: #111827;
+  --mid: #1c2433;
+  --card: #161d2b;
+  --border: rgba(255,255,255,0.07);
+  --border-light: rgba(255,255,255,0.12);
+  --white: #ffffff;
+  --muted: #8b9ab0;
+  --text: #d1d8e0;
+  --blue: #3b82f6;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  background: rgba(13,17,23,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); transition: background 0.3s;
+}
+.nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 3px; text-decoration: none; }
+.nav-logo .gra { color: var(--green); }
+.nav-logo .rose { color: var(--stone); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-actions { display: flex; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px; border-radius: 7px; font-size: 14px; font-weight: 600; font-family: 'Outfit', sans-serif; text-decoration: none; cursor: pointer; border: none; transition: all 0.18s; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-light); }
+.btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-dark); box-shadow: 0 4px 16px rgba(34,197,94,0.3); transform: translateY(-1px); }
+.btn-xl { padding: 15px 36px; font-size: 16px; border-radius: 9px; }
+
+/* HERO */
+#home {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 140px 60px 100px; position: relative; overflow: hidden;
+}
+.hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=85') center/cover no-repeat; filter: brightness(0.18) saturate(0.6); z-index: 0; }
+.hero-grad { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,197,94,0.06), transparent 60%), linear-gradient(to bottom, transparent 40%, var(--dark) 100%); z-index: 1; }
+.hero-inner { position: relative; z-index: 2; max-width: 900px; text-align: center; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 32px; padding: 6px 18px; border: 1px solid rgba(34,197,94,0.25); border-radius: 100px; background: rgba(34,197,94,0.06); animation: fadeUp 0.5s ease both; }
+.hero-wordmark { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(80px,14vw,160px); font-weight: 900; letter-spacing: 6px; line-height: 0.88; margin-bottom: 28px; animation: fadeUp 0.5s 0.08s ease both; }
+.hero-wordmark .gra { color: var(--green); }
+.hero-wordmark .rose { color: var(--white); }
+.hero-tagline { font-size: clamp(18px,2.5vw,24px); font-weight: 300; color: var(--text); letter-spacing: 0.5px; margin-bottom: 16px; animation: fadeUp 0.5s 0.16s ease both; }
+.hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto 48px; line-height: 1.7; animation: fadeUp 0.5s 0.24s ease both; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.5s 0.32s ease both; }
+.hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,0.2); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; animation: fadeUp 1s 0.8s ease both; }
+.scroll-bar { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--green), transparent); animation: spulse 2s ease-in-out infinite; }
+@keyframes spulse { 0%,100%{opacity:0.4}50%{opacity:1} }
+
+/* TICKER */
+.ticker { background: var(--mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 0; overflow: hidden; }
+.ticker-track { display: flex; animation: ticker 25s linear infinite; white-space: nowrap; }
+.ticker-item { display: inline-flex; align-items: center; gap: 12px; padding: 0 36px; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+.tsep { color: var(--green); }
+@keyframes ticker { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+
+/* ABOUT */
+#about { padding: 120px 60px; max-width: 1160px; margin: 0 auto; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+.h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(38px,4vw,52px); font-weight: 800; line-height: 1.05; margin-bottom: 20px; letter-spacing: 0.5px; }
+.body-text { font-size: 16px; color: var(--text); line-height: 1.8; margin-bottom: 16px; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; transition: border-color 0.2s; }
+.stat-box:hover { border-color: rgba(34,197,94,0.25); }
+.stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 42px; font-weight: 900; color: var(--green); line-height: 1; margin-bottom: 6px; }
+.stat-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.photo-stack { position: relative; height: 520px; }
+.pcard { position: absolute; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+.pcard img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pcard.main { width: 80%; height: 380px; top: 0; right: 0; }
+.pcard.sec { width: 56%; height: 240px; bottom: 0; left: 0; border: 3px solid var(--dark); }
+
+/* PRODUCTS */
+#products { padding: 0 0 120px; }
+.prod-header { text-align: center; padding: 0 60px; margin-bottom: 64px; }
+.prod-header p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+.prod-canvas { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; overflow: hidden; }
+.prod-panel { padding: 72px 64px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.prod-panel.aio { background: #0b1526; }
+.prod-panel.aie { background: #081410; }
+.prod-panel.aio::after { content:''; position:absolute; top:0; bottom:0; right:-40px; width:80px; background:var(--dark); transform:skewX(-4deg); z-index:10; }
+.prod-panel::before { content:''; position:absolute; width:360px; height:360px; border-radius:50%; filter:blur(100px); opacity:0.12; pointer-events:none; z-index:0; }
+.prod-panel.aio::before { background:var(--blue); top:-100px; right:0; }
+.prod-panel.aie::before { background:var(--green); bottom:-100px; left:0; }
+.prod-inner { position: relative; z-index: 1; }
+.prod-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; width: fit-content; }
+.chip-b { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); color: #7eb8f7; }
+.chip-g { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: var(--green); }
+.prod-name { font-family: 'Barlow Condensed', sans-serif; font-size: 58px; font-weight: 900; line-height: 0.95; letter-spacing: 1px; margin-bottom: 10px; }
+.ab { color: #60a5fa; }
+.ag { color: var(--green); }
+.prod-sub { font-size: 13px; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 28px; font-weight: 500; }
+.prod-desc { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 32px; max-width: 420px; }
+.prod-feats { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 40px; }
+.prod-feats li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.65); }
+.chk { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.chk-b { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.chk-g { background: rgba(34,197,94,0.15); color: var(--green); }
+.prod-cta { margin-top: auto; }
+.btn-b { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #7eb8f7; }
+.btn-b:hover { background: rgba(59,130,246,0.25); }
+.btn-go { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
+.btn-go:hover { background: rgba(34,197,94,0.2); }
+.cs-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); border: 1px dashed rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 7px; }
+
+/* INDUSTRIES */
+#industries { padding: 0 0 120px; }
+.ind-header { text-align: center; padding: 0 60px; margin-bottom: 56px; }
+.mosaic { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 10px; padding: 0 60px; max-width: 1160px; margin: 0 auto; }
+.mcell { border-radius: 12px; overflow: hidden; position: relative; }
+.mcell.sr { grid-row: span 2; }
+.mcell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; filter: brightness(0.85) saturate(0.9); }
+.mcell:hover img { transform: scale(1.04); filter: brightness(0.95) saturate(1); }
+.mlabel { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 18px 16px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.92); }
+
+/* ABOUT US */
+#about-us { padding: 120px 0; background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.aus-inner { max-width: 1160px; margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start; }
+.vrows { display: flex; flex-direction: column; gap: 20px; }
+.vrow { display: flex; gap: 20px; align-items: flex-start; padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.2s; }
+.vrow:hover { border-color: rgba(34,197,94,0.2); }
+.vicon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.vtxt h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.vtxt p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* FOOTER */
+footer { background: var(--dark); border-top: 1px solid var(--border); padding: 56px 60px 36px; }
+.ft { display: flex; justify-content: space-between; align-items: flex-start; max-width: 1160px; margin: 0 auto 48px; flex-wrap: wrap; gap: 40px; }
+.fbrand .flogo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 3px; margin-bottom: 12px; }
+.fbrand .flogo .gra { color: var(--green); }
+.fbrand .flogo .rose { color: var(--stone); }
+.fbrand p { font-size: 13px; color: var(--muted); max-width: 220px; line-height: 1.6; }
+.fcols { display: flex; gap: 64px; }
+.fcol h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.fcol ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.fcol a { font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.fcol a:hover { color: var(--white); }
+.fbot { max-width: 1160px; margin: 0 auto; padding-top: 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.25); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:0 24px} .nav-links{display:none}
+  #home{padding:120px 24px 80px}
+  #about{padding:80px 24px}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .photo-stack{height:260px} .pcard.main{width:100%;height:260px;position:relative} .pcard.sec{display:none}
+  .prod-canvas{grid-template-columns:1fr}
+  .prod-panel.aio::after{display:none}
+  .prod-panel{padding:48px 28px}
+  .prod-header,.ind-header{padding:0 24px}
+  .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto;padding:0 24px}
+  .mcell.sr{grid-row:span 1}
+  .aus-inner{grid-template-columns:1fr;gap:48px;padding:0 24px}
+  footer{padding:48px 24px 28px}
+  .ft{flex-direction:column;gap:32px}
+  .fbot{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#home" class="nav-logo"><span class="gra">GRA</span><span class="rose">ROSE</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#about-us">Our Story</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://aio.grarose.com" class="btn btn-ghost">Sign In</a>
+    <a href="https://aio.grarose.com" class="btn btn-primary">Get Started Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">⚡ Field Management &amp; AI Estimating</div>
+    <div class="hero-wordmark"><span class="gra">GRA</span><span class="rose">ROSE</span></div>
+    <div class="hero-tagline">One Platform. Every Trade.</div>
+    <p class="hero-desc">Grarose gives contractors the tools to quote faster, invoice smarter, and win more bids — from the field or the office.</p>
+    <div class="hero-btns">
+      <a href="https://aio.grarose.com" class="btn btn-primary btn-xl">Start Free Trial</a>
+      <a href="#products" class="btn btn-ghost btn-xl">Explore Products</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    scroll
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Structured Cabling <span class="tsep">·</span></span>
+    <span class="ticker-item">Commercial Construction <span class="tsep">·</span></span>
+    <span class="ticker-item">Electrical <span class="tsep">·</span></span>
+    <span class="ticker-item">Residential Building <span class="tsep">·</span></span>
+    <span class="ticker-item">Networking &amp; AV <span class="tsep">·</span></span>
+    <span class="ticker-item">HVAC <span class="tsep">·</span></span>
+    <span class="ticker-item">Plumbing <span class="tsep">·</span></span>
+    <span class="ticker-item">Security &amp; Access Control <span class="tsep">·</span></span>
+    <span class="ticker-item">Painting <span class="tsep">·</span></span>
+    <span class="ticker-item">Handyman Services <span class="tsep">·</span></span>
+    <span class="ticker-item">Structured Cabling <span class="tsep">·</span></span>
+    <span class="ticker-item">Commercial Construction <span class="tsep">·</span></span>
+    <span class="ticker-item">Electrical <span class="tsep">·</span></span>
+    <span class="ticker-item">Residential Building <span class="tsep">·</span></span>
+    <span class="ticker-item">Networking &amp; AV <span class="tsep">·</span></span>
+    <span class="ticker-item">HVAC <span class="tsep">·</span></span>
+    <span class="ticker-item">Plumbing <span class="tsep">·</span></span>
+    <span class="ticker-item">Security &amp; Access Control <span class="tsep">·</span></span>
+    <span class="ticker-item">Painting <span class="tsep">·</span></span>
+    <span class="ticker-item">Handyman Services <span class="tsep">·</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="label">About Grarose</div>
+      <h2 class="h2">Software built for people who work with their hands.</h2>
+      <p class="body-text">Grarose was created for contractors and trade professionals who need business tools that keep up with them — not the other way around. No complicated setups, no bloated enterprise systems.</p>
+      <p class="body-text" style="color:var(--muted)">From quoting and invoicing to AI-powered estimating, Grarose gives every trade business the tools to look professional, get paid faster, and win more work.</p>
+      <div class="stats-grid">
+        <div class="stat-box reveal d1"><div class="stat-num">2 min</div><div class="stat-lbl">Average time to create and send a quote</div></div>
+        <div class="stat-box reveal d2"><div class="stat-num">Any device</div><div class="stat-lbl">Works from the field, truck, or office</div></div>
+        <div class="stat-box reveal d1"><div class="stat-num">Free</div><div class="stat-lbl">To get started — no credit card required</div></div>
+        <div class="stat-box reveal d2"><div class="stat-num">2 products</div><div class="stat-lbl">One platform to run your entire business</div></div>
+      </div>
+    </div>
+    <div class="photo-stack reveal d2">
+      <div class="pcard main"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=85" alt="Construction workers"></div>
+      <div class="pcard sec"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=85" alt="Electrical work"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" style="padding:0 0 120px">
+  <div class="prod-header reveal">
+    <div class="label">Our Products</div>
+    <h2 class="h2">Two tools built for the trades.</h2>
+    <p>Field management meets AI estimating — under one roof, built for one purpose.</p>
+  </div>
+  <div class="prod-canvas">
+    <div class="prod-panel aio reveal">
+      <div class="prod-inner">
+        <div class="prod-chip chip-b">● Field Management</div>
+        <div class="prod-name">Grarose <span class="ab">AIO</span></div>
+        <div class="prod-sub">All In One — Field Management Platform</div>
+        <p class="prod-desc">Run your entire contracting business from your phone. Quote customers, send professional invoices, schedule jobs, collect digital approvals, and track everything in real time.</p>
+        <ul class="prod-feats">
+          <li><span class="chk chk-b">✓</span> Quotes with e-signature approval</li>
+          <li><span class="chk chk-b">✓</span> Invoice management &amp; payment tracking</li>
+          <li><span class="chk chk-b">✓</span> Customer &amp; job scheduling</li>
+          <li><span class="chk chk-b">✓</span> Smart price book with autocomplete</li>
+          <li><span class="chk chk-b">✓</span> Automated overdue reminders</li>
+          <li><span class="chk chk-b">✓</span> Real-time dashboard &amp; reporting</li>
+        </ul>
+        <div class="prod-cta"><a href="https://aio.grarose.com" class="btn btn-b btn-xl">Launch Grarose AIO →</a></div>
+      </div>
+    </div>
+    <div class="prod-panel aie reveal d2">
+      <div class="prod-inner">
+        <div class="prod-chip chip-g">● AI Estimating</div>
+        <div class="prod-name">Grarose <span class="ag">AIE</span></div>
+        <div class="prod-sub">AI Estimating — Intelligent Bid Builder</div>
+        <p class="prod-desc">Win more bids with AI-powered estimating built specifically for the trades. Analyze project scope, generate accurate material and labor costs, and produce professional proposals in minutes.</p>
+        <ul class="prod-feats">
+          <li><span class="chk chk-g">✓</span> AI-powered scope &amp; cost analysis</li>
+          <li><span class="chk chk-g">✓</span> Material &amp; labor estimation</li>
+          <li><span class="chk chk-g">✓</span> Blueprint &amp; document parsing</li>
+          <li><span class="chk chk-g">✓</span> Trade-specific pricing databases</li>
+          <li><span class="chk chk-g">✓</span> Professional proposal generation</li>
+          <li><span class="chk chk-g">✓</span> Seamless integration with Grarose AIO</li>
+        </ul>
+        <div class="prod-cta"><div class="cs-badge">🚧 &nbsp;Coming Soon — Join the waitlist</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" style="padding:0 0 120px">
+  <div class="ind-header reveal">
+    <div class="label">Industries We Serve</div>
+    <h2 class="h2">Built for every trade.</h2>
+  </div>
+  <div class="mosaic">
+    <div class="mcell sr"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85" alt="Commercial construction"><div class="mlabel">Commercial Construction</div></div>
+    <div class="mcell"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=85" alt="Electrical"><div class="mlabel">Electrical</div></div>
+    <div class="mcell"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85" alt="Networking"><div class="mlabel">Networking &amp; Cabling</div></div>
+    <div class="mcell"><img src="https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=600&q=85" alt="Plumbing"><div class="mlabel">Plumbing</div></div>
+    <div class="mcell"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=85" alt="Residential"><div class="mlabel">Residential Building</div></div>
+    <div class="mcell"><img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=85" alt="Painting"><div class="mlabel">Painting</div></div>
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section id="about-us">
+  <div class="aus-inner">
+    <div class="reveal">
+      <div class="label">Our Story</div>
+      <h2 class="h2">Why we built Grarose.</h2>
+      <p class="body-text">Grarose was born out of a simple frustration — contractors are some of the most skilled professionals in any industry, yet they're stuck managing their businesses with tools that were never designed for them.</p>
+      <p class="body-text" style="color:var(--muted)">We built Grarose to change that. Every feature exists for one reason: to give trade professionals back their time so they can focus on the work that matters.</p>
+      <p class="body-text" style="color:var(--muted)">Our products are mobile-first, built for speed, and designed to work the way you work — whether you're on a job site at 7am or catching up on quotes after dinner.</p>
+    </div>
+    <div class="vrows reveal d2">
+      <div class="vrow"><div class="vicon">🔧</div><div class="vtxt"><h4>Built for the Field</h4><p>Every feature is designed for contractors first. Fast, intuitive, and works on any device — no training required.</p></div></div>
+      <div class="vrow"><div class="vicon">⚡</div><div class="vtxt"><h4>Speed is the Feature</h4><p>A quote should take 2 minutes. An invoice 30 seconds. We build for speed because your time is your most valuable asset.</p></div></div>
+      <div class="vrow"><div class="vicon">🤝</div><div class="vtxt"><h4>Transparent Pricing</h4><p>No hidden fees, no per-seat surprises. Start free, grow at your pace, and always know exactly what you're paying for.</p></div></div>
+      <div class="vrow"><div class="vicon">🧠</div><div class="vtxt"><h4>Intelligence Built In</h4><p>From smart price books to AI-powered estimating, Grarose gets smarter the more you use it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="fbrand">
+      <div class="flogo"><span class="gra">GRA</span><span class="rose">ROSE</span></div>
+      <p>One platform for every trade. Built to help contractors run a better business.</p>
+    </div>
+    <div class="fcols">
+      <div class="fcol">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="https://aio.grarose.com">Grarose AIO</a></li>
+          <li><a href="#products">Grarose AIE</a></li>
+          <li><a href="https://aio.grarose.com">Sign In</a></li>
+          <li><a href="https://aio.grarose.com">Get Started Free</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#about-us">Our Story</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="mailto:admin@grarose.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Grarose. All rights reserved.</span>
+    <span>Built for the Trades.</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.background = window.scrollY > 80
+      ? 'rgba(13,17,23,0.98)' : 'rgba(13,17,23,0.92)';
+  });
+</script>
+</body>
+</html>
