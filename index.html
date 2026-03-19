@@ -29,6 +29,7 @@
 
 html { scroll-behavior: smooth; }
 body { font-family: 'Outfit', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+section[id], div[id] { scroll-margin-top: 72px; }
 
 /* NAV */
 nav {
@@ -379,7 +380,7 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
           <li><a href="#about">About</a></li>
           <li><a href="#about-us">Our Story</a></li>
           <li><a href="#industries">Industries</a></li>
-          <li><a href="mailto:admin@grarose.com">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#2e4f4a4347406e495c4f5c415d4b004d4143">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -390,16 +391,11 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').style.background = window.scrollY > 80
-      ? 'rgba(13,17,23,0.98)' : 'rgba(13,17,23,0.92)';
-  });
-</script>
-</body>
-</html>
+    document.
