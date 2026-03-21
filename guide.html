@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grarose AIO — Beta User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green: #22C55E;
+  --green-dark: #16a34a;
+  --stone: #A8A29E;
+  --dark: #0d1117;
+  --navy: #111827;
+  --mid: #161d2b;
+  --card: #1c2433;
+  --border: rgba(255,255,255,0.08);
+  --muted: #8b9ab0;
+  --text: #d1d8e0;
+  --orange: #f97316;
+  --blue: #3b82f6;
+  --red: #ef4444;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--dark); color: #fff; line-height: 1.7; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  padding: 16px 48px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(13,17,23,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; letter-spacing: 3px; text-decoration: none; }
+.logo .gra { color: var(--green); }
+.logo .rose { color: var(--stone); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.beta-chip { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); padding: 4px 10px; border: 1px solid rgba(249,115,22,0.3); border-radius: 100px; background: rgba(249,115,22,0.08); }
+.nav-link { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-link:hover { color: #fff; }
+
+/* HERO */
+.hero {
+  padding: 64px 48px 56px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #0d1117 0%, #111827 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: var(--green);
+  filter: blur(120px);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.hero-inner { max-width: 860px; }
+.hero-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 56px); font-weight: 900; letter-spacing: 1px; line-height: 1.05; margin-bottom: 16px; }
+.hero-sub { font-size: 16px; color: var(--text); max-width: 560px; line-height: 1.7; margin-bottom: 28px; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; background: var(--green); color: #fff;
+  border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none;
+  transition: all 0.2s;
+}
+.hero-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(34,197,94,0.3); }
+
+/* LAYOUT */
+.main { display: grid; grid-template-columns: 240px 1fr; gap: 0; max-width: 1200px; margin: 0 auto; }
+
+/* SIDEBAR */
+.sidebar {
+  padding: 40px 24px;
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  height: calc(100vh - 57px);
+  overflow-y: auto;
+}
+.sidebar-section { margin-bottom: 32px; }
+.sidebar-heading { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.sidebar-links a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  padding: 7px 10px; border-radius: 7px;
+  transition: all 0.15s;
+}
+.sidebar-links a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.sidebar-links a.active { color: var(--green); background: rgba(34,197,94,0.08); }
+.step-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+
+/* CONTENT */
+.content { padding: 48px 56px 80px; }
+
+.section { margin-bottom: 64px; scroll-margin-top: 80px; }
+
+.section-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  font-size: 14px; font-weight: 700;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px; font-weight: 900; letter-spacing: 0.5px;
+  margin-bottom: 8px; line-height: 1.1;
+}
+
+.section-desc { font-size: 15px; color: var(--text); margin-bottom: 28px; max-width: 600px; }
+
+/* STEPS */
+.steps { display: flex; flex-direction: column; gap: 16px; }
+
+.step {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 20px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+.step:hover { border-color: rgba(34,197,94,0.2); }
+
+.step-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(34,197,94,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+
+.step-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.step-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.step-body p strong { color: var(--text); }
+
+/* TIP BOXES */
+.tip {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.tip.green { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: var(--text); }
+.tip.orange { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); color: var(--text); }
+.tip.blue { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); color: var(--text); }
+.tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+/* FEATURE GRID */
+.feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+.feature-card {
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.feature-card .fc-icon { font-size: 22px; margin-bottom: 10px; }
+.feature-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.feature-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* BADGE EXAMPLES */
+.badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+.badge.green { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.badge.blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+.badge.orange { background: rgba(249,115,22,0.15); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+.badge.red { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.badge.stone { background: rgba(168,162,158,0.15); color: var(--stone); border: 1px solid rgba(168,162,158,0.3); }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+/* FEEDBACK SECTION */
+#feedback { scroll-margin-top: 80px; }
+.feedback-header { margin-bottom: 32px; }
+.form-wrap {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.form-wrap iframe { display: block; width: 100%; border: none; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 48px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: #fff; }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 40px 20px; }
+  .main { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .content { padding: 32px 20px; }
+  .feature-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://grarose.com" class="logo"><span class="gra">GRA</span><span class="rose">ROSE</span></a>
+  <div class="nav-right">
+    <span class="beta-chip">Beta</span>
+    <a href="https://aio.grarose.com" class="nav-link">Open App →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Grarose AIO — Beta User Guide</div>
+    <h1 class="hero-title">Welcome to Grarose AIO.<br>Let's get you set up.</h1>
+    <p class="hero-sub">This guide walks you through everything you need to know to start quoting customers, sending invoices, and running your business on Grarose. It takes about 10 minutes to get fully set up.</p>
+    <a href="https://aio.grarose.com" class="hero-cta">Open Grarose AIO →</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul class="sidebar-links">
+        <li><a href="#setup"><span class="step-num">1</span> Account Setup</a></li>
+        <li><a href="#customers"><span class="step-num">2</span> Add Customers</a></li>
+        <li><a href="#quotes"><span class="step-num">3</span> Create a Quote</a></li>
+        <li><a href="#invoices"><span class="step-num">4</span> Send an Invoice</a></li>
+        <li><a href="#dashboard"><span class="step-num">5</span> Dashboard</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Features</div>
+      <ul class="sidebar-links">
+        <li><a href="#approval">Quote Approvals</a></li>
+        <li><a href="#pricebook">Price Book</a></li>
+        <li><a href="#schedule">Job Schedule</a></li>
+        <li><a href="#payments">Payment Links</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Beta</div>
+      <ul class="sidebar-links">
+        <li><a href="#feedback">Leave Feedback</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SECTION 1: SETUP -->
+    <div class="section" id="setup">
+      <div class="section-num">1</div>
+      <h2>Account Setup</h2>
+      <p class="section-desc">Before you do anything else, fill out your Settings page. This is where your business info lives — it shows up on every quote and invoice you send.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">⚙️</div>
+          <div class="step-body">
+            <h4>Go to Settings</h4>
+            <p>Click <strong>Settings</strong> in the left sidebar. Fill in your name, business name, phone number, address, trade/specialty, and license number.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">💳</div>
+          <div class="step-body">
+            <h4>Add Payment Methods</h4>
+            <p>Scroll down to <strong>Payment Methods</strong> and add however you collect payments — Venmo, PayPal, Square, Zelle, Cash App, etc. Your customers will see Pay Now buttons on invoices and quotes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">💾</div>
+          <div class="step-body">
+            <h4>Save Settings</h4>
+            <p>Click <strong>Save Settings</strong>. The button will turn green and show <strong>✓ Saved!</strong> to confirm it worked.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip green">
+        <div class="tip-icon">✅</div>
+        <div>Your business name appears on every quote and invoice automatically once it's saved. Don't skip this step.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SECTION 2: CUSTOMERS -->
+    <div class="section" id="customers">
+      <div class="section-num">2</div>
+      <h2>Add Customers</h2>
+      <p class="section-desc">Add the customers you work with. You only need their name — phone and email are optional but required to send quotes and invoices to them.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">👤</div>
+          <div class="step-body">
+            <h4>Go to Customers</h4>
+            <p>Click <strong>Customers</strong> in the sidebar, then click <strong>+ Add Customer</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">📋</div>
+          <div class="step-body">
+            <h4>Fill in their info</h4>
+            <p>Enter their first and last name, phone number, email address, and any notes about them. Phone and email are needed to send them quotes and invoices.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">⚡</div>
+          <div class="step-body">
+            <h4>Quick-add during quoting</h4>
+            <p>You can also add a new customer on the fly when creating a quote — click <strong>+ New Customer</strong> inside the quote form without leaving the screen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SECTION 3: QUOTES -->
+    <div class="section" id="quotes">
+      <div class="section-num">3</div>
+      <h2>Create & Send a Quote</h2>
+      <p class="section-desc">Quotes are the heart of Grarose. You can create a professional quote and send it to a customer in under 2 minutes.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">📋</div>
+          <div class="step-body">
+            <h4>Click + New Quote</h4>
+            <p>From the Dashboard or Quotes page, click <strong>+ New Quote</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">👤</div>
+          <div class="step-body">
+            <h4>Select the customer</h4>
+            <p>Choose a customer from the dropdown or click <strong>+ New Customer</strong> to add one on the spot.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🔧</div>
+          <div class="step-body">
+            <h4>Add line items</h4>
+            <p>Type a description for each item — the <strong>Price Book</strong> will autocomplete items you've used before. Set quantity and price for each line.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">💰</div>
+          <div class="step-body">
+            <h4>Add tax if needed</h4>
+            <p>Check the <strong>Add Tax</strong> box and enter your tax rate. Tax is calculated automatically on the total.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">📱</div>
+          <div class="step-body">
+            <h4>Send to Customer</h4>
+            <p>Click <strong>Send to Customer</strong>. A panel opens with options to send via <strong>Text Message</strong>, <strong>Email</strong>, or <strong>Copy to Clipboard</strong>. The message is pre-filled with the quote details.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip blue">
+        <div class="tip-icon">💡</div>
+        <div>Every quote sent includes a <strong>Review & Approve Quote</strong> button in the email. Your customer clicks it, sees the full quote, types their name as a signature, and approves it — no login required.</div>
+      </div>
+
+      <p style="font-size:14px;color:var(--muted);margin-top:20px">Quote statuses explained:</p>
+      <div class="badge-row">
+        <span class="badge stone">Draft</span>
+        <span class="badge blue">Sent</span>
+        <span class="badge green">✅ Approved</span>
+        <span class="badge orange">Invoiced</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SECTION 4: INVOICES -->
+    <div class="section" id="invoices">
+      <div class="section-num">4</div>
+      <h2>Create & Send an Invoice</h2>
+      <p class="section-desc">Once a quote is approved, convert it to an invoice with one click — or create a new invoice from scratch.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">💰</div>
+          <div class="step-body">
+            <h4>Convert a Quote to Invoice</h4>
+            <p>Open an approved quote, click <strong>💰 Convert to Invoice</strong>. The invoice is created automatically with all the same line items and totals. You'll be taken to the Invoices page.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">➕</div>
+          <div class="step-body">
+            <h4>Or create a new Invoice</h4>
+            <p>Click <strong>+ New Invoice</strong> from the Invoices page and fill it in manually.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">📧</div>
+          <div class="step-body">
+            <h4>Send the Invoice</h4>
+            <p>Open the invoice and click <strong>📱 Send Invoice</strong>. Choose email or text. If you've added payment methods in Settings, <strong>Pay Now</strong> buttons will appear in the email.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">✅</div>
+          <div class="step-body">
+            <h4>Mark as Paid</h4>
+            <p>Once your customer pays, open the invoice and click <strong>Mark as Paid</strong>. The invoice status turns green and your dashboard updates.</p>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:var(--muted);margin-top:20px">Invoice statuses explained:</p>
+      <div class="badge-row">
+        <span class="badge stone">Pending</span>
+        <span class="badge blue">Sent</span>
+        <span class="badge red">Overdue</span>
+        <span class="badge green">Paid</span>
+      </div>
+
+      <div class="tip orange">
+        <div class="tip-icon">⚠️</div>
+        <div>Overdue invoice reminders are sent <strong>automatically every day</strong> to both you and the customer once an invoice passes its due date — no action needed from you.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SECTION 5: DASHBOARD -->
+    <div class="section" id="dashboard">
+      <div class="section-num">5</div>
+      <h2>Dashboard</h2>
+      <p class="section-desc">Your dashboard gives you a real-time snapshot of your business at a glance.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="fc-icon">📊</div>
+          <h4>Stat Cards</h4>
+          <p>See Quotes Pending, Outstanding Invoices, This Period total, and Collected — toggle between Month and Year to Date.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📈</div>
+          <h4>Revenue Chart</h4>
+          <p>Bar chart showing paid invoice revenue over the last 6 months. Fills in as you use the app.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📉</div>
+          <h4>Quotes vs Invoices</h4>
+          <p>Line chart comparing quote and invoice volume — helps you see your pipeline activity over time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🔔</div>
+          <h4>Real-time Approvals</h4>
+          <p>When a customer approves a quote, a notification pops up instantly — no refresh needed.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- APPROVAL -->
+    <div class="section" id="approval">
+      <h2>Quote Approvals</h2>
+      <p class="section-desc">Every quote you send includes a unique approval link. Here's what the customer experience looks like.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">📧</div>
+          <div class="step-body">
+            <h4>Customer receives the quote</h4>
+            <p>They get an email or text with the quote details and a green <strong>Review & Approve Quote</strong> button.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🖊️</div>
+          <div class="step-body">
+            <h4>Customer signs</h4>
+            <p>They click the link, review the full quote breakdown, type their full name as an e-signature, and click <strong>Approve Quote</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">✅</div>
+          <div class="step-body">
+            <h4>You get notified instantly</h4>
+            <p>A notification pops up in your dashboard the moment they approve. The quote status changes to <strong>✅ Approved</strong>. Their name, timestamp, and IP address are logged.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- PRICE BOOK -->
+    <div class="section" id="pricebook">
+      <h2>Price Book</h2>
+      <p class="section-desc">Grarose learns your pricing automatically. Every time you add a line item to a quote, it's saved to your Price Book.</p>
+
+      <div class="tip green">
+        <div class="tip-icon">💡</div>
+        <div>When creating a quote, start typing a line item description and your Price Book will autocomplete — including the price you used last time. The more you use Grarose, the faster quoting gets.</div>
+      </div>
+
+      <p style="font-size:15px;color:var(--text)">You can also manage your Price Book directly — go to <strong>Price Book</strong> in the sidebar to edit, delete, or review saved items and prices.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SCHEDULE -->
+    <div class="section" id="schedule">
+      <h2>Job Schedule</h2>
+      <p class="section-desc">Keep track of upcoming jobs in the Schedule page.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">📅</div>
+          <div class="step-body">
+            <h4>Add a Job</h4>
+            <p>Click <strong>+ Add Job</strong>, select the customer, add a description, and pick a date. Jobs show up in a weekly calendar view.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">✅</div>
+          <div class="step-body">
+            <h4>Mark Complete</h4>
+            <p>When a job is done, mark it complete. Completed jobs feed into the Activity feed on your dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- PAYMENT LINKS -->
+    <div class="section" id="payments">
+      <h2>Payment Links</h2>
+      <p class="section-desc">Grarose works with any payment method you already use — Venmo, PayPal, Square, Zelle, Cash App, or anything else with a link.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">⚙️</div>
+          <div class="step-body">
+            <h4>Add in Settings</h4>
+            <p>Go to <strong>Settings → Payment Methods</strong> and click <strong>+ Add Payment Method</strong>. Enter the name (e.g. Venmo) and your payment link or handle.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">📧</div>
+          <div class="step-body">
+            <h4>Appears on invoices automatically</h4>
+            <p>Once saved, every invoice email you send will include green <strong>Pay via [Method]</strong> buttons at the bottom. Customers click and pay directly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip blue">
+        <div class="tip-icon">💡</div>
+        <div>You can add multiple payment methods — customers will see all of them and can choose whichever they prefer.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- FEEDBACK -->
+    <div class="section" id="feedback">
+      <div class="feedback-header">
+        <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;padding:5px 14px;border:1px solid rgba(249,115,22,0.3);border-radius:100px;background:rgba(249,115,22,0.08)">🧪 Beta Feedback</div>
+        <h2>Tell us what you think.</h2>
+        <p class="section-desc">You're using an early version of Grarose AIO. Your feedback directly shapes what we build next. Nothing is too small to mention — bugs, confusion, missing features, all of it helps.</p>
+      </div>
+      <div class="form-wrap">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9R2yCjw6uojPjETwqHSoaSwQIuXX39HKdhPt0lr4L1V4wCw/viewform?embedded=true" width="100%" height="1048" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Grarose. All rights reserved.</span>
+  <a href="https://grarose.com">grarose.com</a>
+</footer>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.sidebar-links a');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
