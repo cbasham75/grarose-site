@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Consent & Opt-In — Grarose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green: #22C55E;
+  --stone: #A8A29E;
+  --dark: #0d1117;
+  --mid: #161d2b;
+  --border: rgba(255,255,255,0.08);
+  --muted: #8b9ab0;
+  --text: #d1d8e0;
+}
+body { font-family: 'Outfit', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; line-height: 1.7; }
+
+nav {
+  padding: 20px 48px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 3px; text-decoration: none; }
+.logo .gra { color: var(--green); }
+.logo .rose { color: var(--stone); }
+.back { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.back:hover { color: #fff; }
+
+.container { max-width: 760px; margin: 0 auto; padding: 60px 40px 80px; }
+
+h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: 1px; margin-bottom: 8px; }
+.updated { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+
+h2 { font-size: 18px; font-weight: 700; color: #fff; margin: 36px 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+p { font-size: 15px; color: var(--text); margin-bottom: 14px; }
+ul { padding-left: 20px; margin-bottom: 14px; }
+ul li { font-size: 15px; color: var(--text); margin-bottom: 8px; }
+strong { color: #fff; }
+
+.highlight {
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.highlight p { color: var(--text); margin: 0; }
+
+.sample-msg {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--text);
+  margin: 16px 0;
+  font-style: italic;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://grarose.com" class="logo"><span class="gra">GRA</span><span class="rose">ROSE</span></a>
+  <a href="https://grarose.com" class="back">← grarose.com</a>
+</nav>
+
+<div class="container">
+
+  <h1>SMS Consent & Opt-In Policy</h1>
+  <p class="updated">Last updated: March 2026</p>
+
+  <p>Grarose is a field management platform used by contractors and trade professionals to manage quotes, invoices, and customer communications. This page describes how SMS consent is collected from customers who receive text messages sent through the Grarose platform.</p>
+
+  <h2>How Consent Is Collected</h2>
+
+  <p>Grarose operates as a communication platform on behalf of contractors. SMS messages are sent by contractors to their customers — not by Grarose directly. Consent is collected by the contractor at the time of the business relationship, prior to any SMS being sent.</p>
+
+  <p>The opt-in process works as follows:</p>
+
+  <ul>
+    <li><strong>Verbal consent</strong> — When a contractor engages a customer for a job, they verbally inform the customer that they will receive SMS notifications via Grarose, including quote summaries, invoice reminders, and payment confirmations. The customer verbally agrees to receive these messages.</li>
+    <li><strong>Customer phone number</strong> — The contractor enters the customer's phone number into Grarose only after the customer has provided consent to be contacted.</li>
+    <li><strong>Opt-out</strong> — Every SMS sent through Grarose includes opt-out instructions. Customers can reply <strong>STOP</strong> at any time to unsubscribe from further messages.</li>
+  </ul>
+
+  <div class="highlight">
+    <p><strong>Grarose requires all contractors using the platform to obtain proper consent from their customers before sending any SMS messages.</strong> Use of the platform constitutes agreement to this requirement.</p>
+  </div>
+
+  <h2>Types of Messages Sent</h2>
+
+  <p>Messages sent through Grarose are transactional and customer-service in nature. They include:</p>
+
+  <ul>
+    <li>Quote notifications — informing a customer that a quote is ready for review</li>
+    <li>Invoice reminders — notifying a customer of an outstanding invoice</li>
+    <li>Payment confirmations — confirming receipt of payment</li>
+    <li>Job scheduling notifications — informing a customer of an upcoming appointment</li>
+  </ul>
+
+  <p>Grarose does not send marketing, promotional, or unsolicited messages.</p>
+
+  <h2>Sample Message</h2>
+
+  <p>A typical SMS sent through Grarose looks like this:</p>
+
+  <div class="sample-msg">
+    Hi Sarah, this is John Smith from ABC Plumbing via Grarose. Your quote for kitchen pipe repair totals $450. Reply STOP to opt out.
+  </div>
+
+  <p>All messages include the contractor's business name, the purpose of the message, and opt-out instructions.</p>
+
+  <h2>Opt-Out Instructions</h2>
+
+  <p>Customers can opt out of SMS messages at any time by replying <strong>STOP</strong> to any message received. Upon receiving a STOP reply, no further messages will be sent to that number from that contractor's account.</p>
+
+  <p>For help, customers can reply <strong>HELP</strong> to any message or contact Grarose support at <a href="mailto:admin@grarose.com" style="color:var(--green)">admin@grarose.com</a>.</p>
+
+  <h2>Message Frequency</h2>
+
+  <p>Message frequency varies based on the contractor's business activity. Customers typically receive messages only when a quote, invoice, or job update is relevant to their account. Grarose does not send recurring scheduled marketing messages.</p>
+
+  <h2>Contact</h2>
+
+  <p>For questions about this policy or to report misuse of the Grarose platform, contact us at <a href="mailto:admin@grarose.com" style="color:var(--green)">admin@grarose.com</a>.</p>
+
+</div>
+
+<footer>
+  <span>© 2026 Grarose. All rights reserved.</span>
+  <a href="https://grarose.com">grarose.com</a>
+</footer>
+
+</body>
+</html>
